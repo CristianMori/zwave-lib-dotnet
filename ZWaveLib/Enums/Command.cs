@@ -134,7 +134,10 @@ namespace ZWaveLib
         DoorLockReport = 0x03,
         DoorLockConfigurationSet = 0x04,
         DoorLockConfigurationGet = 0x05,
-        DoorLockConfigurationReport = 0x06
+        DoorLockConfigurationReport = 0x06,
+
+        LocationGet = 0x05, //Added to query device name and location
+        LoocationReply = 0x06 //Added to handle reply to query name and location
     }
 
 }

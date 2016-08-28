@@ -208,6 +208,10 @@ namespace ZWaveLib
         /// <value>The identifier.</value>
         public byte Id { get; /*protected*/ set; }
 
+        public String Name { get; set; } //CMO Retrieve Name 
+
+        public String Location { get; set; } //CMO Retrieve Location
+
         public NodeCapabilities ProtocolInfo { get; /*internal*/ set; }
 
         public NodeVersion Version { get; /*internal*/ set; }

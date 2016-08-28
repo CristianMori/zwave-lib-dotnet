@@ -77,7 +77,9 @@ namespace ZWaveLib
         SecurityDecriptedMessage,
         SecurityGeneratedKey,
         DoorLockStatus,
-        RoutingInfo
+        RoutingInfo,
+        Naming, //CMO Added to get the device name 
+        Location //CMO Added to get the device location
     }
 
 }
