@@ -13,7 +13,7 @@ namespace Test.ZWave
 {
     class MainClass
     {
-        private static string serialPortName = "/dev/ttyUSB0";
+        private static string serialPortName = "COM10";
         private static ControllerStatus controllerStatus = ControllerStatus.Disconnected;
         private static bool showDebugOutput = false;
         private static LoggingRule loggingRule = LogManager.Configuration.LoggingRules[0];
@@ -78,6 +78,13 @@ namespace Test.ZWave
                 case "+":
                     controller.Connect();
                     break;
+                 case "a":
+                        foreach (var node in controller.Nodes)
+                        {
+                            if (node.Id==2)
+                                SwitchBinary.Set(node, 0);
+                        }
+                        break;
                 }
             }
             Console.WriteLine("\nCiao!\n");
@@ -118,6 +125,7 @@ namespace Test.ZWave
         {
             foreach (var node in controller.Nodes)
             {
+                Naming.Get(node);
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("\nNode {0}", node.Id);
                 Console.ForegroundColor = ConsoleColor.White;
@@ -147,10 +155,13 @@ namespace Test.ZWave
                     }
                     Console.WriteLine("        {0} {1}", nodeCmdClass.CommandClass, versionInfo);
                 }
+
                 Console.ForegroundColor = ConsoleColor.White;
                 if (node.Version != null)
                 {
+
                     Console.WriteLine("    Node Version info:");
+                    Console.WriteLine("      "+node.Name);
                     Console.WriteLine("        LibraryType {0}", (node.Version.LibraryType));
                     Console.WriteLine("        ProtocolVersion {0}", (node.Version.ProtocolVersion));
                     Console.WriteLine("        ProtocolSubVersion {0}", (node.Version.ProtocolSubVersion));
@@ -205,6 +216,7 @@ namespace Test.ZWave
             }
             ToggleDebug(false);
         }
+
 
         static void RunStressTest(ZWaveController controller)
         {
